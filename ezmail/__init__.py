@@ -1,0 +1,1 @@
+from .ezmail import sendmail
