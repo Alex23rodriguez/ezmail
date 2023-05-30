@@ -1,1 +1,1 @@
-from .ezmail import sendmail
+from .ezmail import send_mail
