@@ -3,10 +3,9 @@ from io import BufferedReader, TextIOWrapper
 from pathlib import Path
 import ssl
 import smtplib
-from os import environ
 from mimetypes import guess_type
 
-from dotenv import load_dotenv
+from dotenv import dotenv_values
 
 
 def send_mail(
@@ -17,7 +16,12 @@ def send_mail(
     message: str | Path | TextIOWrapper,
     attachments: list[Path] | list[BufferedReader] = [],
 ):
-    assert load_dotenv(envfile), "Could not load specified environment file!"
+    envfile = Path(envfile)
+    assert (
+        envfile.exists() and envfile.is_file()
+    ), "Could not load specified environment file!"
+
+    environ = dotenv_values(envfile)
 
     assert all(
         key in environ for key in ("PORT", "USERNAME", "PASSWORD", "SMTP")
@@ -136,7 +140,6 @@ if __name__ == "__main__":
         message = args.file.read()
 
     send_mail(
-        envfile=".mail.env",
         recipients=recipients,
         subject=args.subject,
         message=message,
