@@ -3,7 +3,8 @@ easily send out emails via python or the cli using python's SMTP module.
 
 ---
 
-# example
+# Getting started
+download the package using pip: `pip install ezmail`
 
 ## `.env` file
 This module uses environment files to handle sensitive info.
@@ -14,7 +15,7 @@ PASSWORD=<password>
 SMTP=<provider's SMTP server>
 PORT=<provider's port>
 ```
-See examples for popular providers below.
+See examples [below](https://github.com/Alex23rodriguez/ezmail/edit/main/README.md#smtp-servers) for popular providers.
 
 ## send from python
 ```python
@@ -30,6 +31,8 @@ send_mail(
 
 ## send from the cli
 `python -m ezmail -s "Email sent from bash" -r "r1@example.com" "r2@example.com" -m "This is my message."`
+
+---
 
 # More advanced uses
 This module allows adding attachments to the email, as well as reading in the message and / or recipients from a file instead of defining them directly.
@@ -86,3 +89,27 @@ Possible flags:
   - `-rf` or `--recipientsfile`: the file containing the addresses of the recipients
 - `-a` or `--attachments`: a list of files to attach to the email (one or more arguments)
 - `-e` or `--env`: the env file where the credentials are defined (default `.env`)
+
+---
+
+# Popular SMTP servers
+Gmail constantly changes the requirements to be able to send out emails through SMTP. It is recommended that you follow a [guide](https://www.gmass.co/blog/gmail-smtp/).
+
+Then, fill in the missing values from the following `.env` file
+## gmail
+```.env
+USERNAME=
+PASSWORD=
+SMTP="smtp.gmail.com"
+PORT=465
+```
+
+# Zoho
+Zoho makes it very simple to send emails through SMTP. Fill in the missing values from the following `.env` file and that's it!
+```.env
+USERNAME=
+PASSWORD=
+SMTP="smtp.zoho.com"
+PORT=465
+```
+
