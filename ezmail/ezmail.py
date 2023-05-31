@@ -16,6 +16,7 @@ def send_mail(
     subject: str,
     message: Union[str, Path, TextIOWrapper],
     attachments: Union[list[Path], list[BufferedReader]] = [],
+    verbose: bool = False,
 ):
     envfile = Path(envfile)
     assert (
@@ -98,7 +99,8 @@ def send_mail(
 
     # establish connection and send email
     with smtplib.SMTP_SSL(smtp_server, port, context=context) as smtp:
-        # smtp.set_debuglevel(1)
+        if verbose:
+            smtp.set_debuglevel(1)
         smtp.login(sender, password)
         smtp.send_message(em)
 
