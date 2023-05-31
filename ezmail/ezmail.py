@@ -4,17 +4,18 @@ from pathlib import Path
 import ssl
 import smtplib
 from mimetypes import guess_type
+from typing import Union
 
 from dotenv import dotenv_values
 
 
 def send_mail(
     *,
-    envfile: str | Path = ".env",
-    recipients: list[str] | Path | TextIOWrapper,
+    envfile: Union[str, Path] = ".env",
+    recipients: Union[list[str], Path, TextIOWrapper],
     subject: str,
-    message: str | Path | TextIOWrapper,
-    attachments: list[Path] | list[BufferedReader] = [],
+    message: Union[str, Path, TextIOWrapper],
+    attachments: Union[list[Path], list[BufferedReader]] = [],
 ):
     envfile = Path(envfile)
     assert (
@@ -31,7 +32,7 @@ def send_mail(
     password = environ["PASSWORD"]
     smtp_server = environ["SMTP"]
 
-    def tofile(a: Path | BufferedReader) -> BufferedReader:
+    def tofile(a: Union[Path, BufferedReader]) -> BufferedReader:
         if isinstance(a, Path):
             return open(a, "rb")
 
