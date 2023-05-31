@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="ezmail",
-    version="0.2.0",
+    version="1.0.0",
     author="Alex Rodriguez",
     author_email="alex.rodriguez.oro@gmail.com",
     description="easily send out emails via SMTP",
