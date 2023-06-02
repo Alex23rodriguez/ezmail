@@ -4,7 +4,7 @@ from pathlib import Path
 import ssl
 import smtplib
 from mimetypes import guess_type
-from typing import Union
+from typing import Union, List, Dict
 
 from dotenv import dotenv_values
 
@@ -12,10 +12,10 @@ from dotenv import dotenv_values
 def send_mail(
     *,
     envfile: Union[str, Path] = ".env",
-    recipients: Union[list[str], Path, TextIOWrapper],
+    recipients: Union[List[str], Path, TextIOWrapper],
     subject: str,
     message: Union[str, Path, TextIOWrapper],
-    attachments: Union[list[Path], list[BufferedReader]] = [],
+    attachments: Union[List[Path], List[BufferedReader]] = [],
     verbose: bool = False,
 ):
     envfile = Path(envfile)
