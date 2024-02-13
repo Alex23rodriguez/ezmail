@@ -16,6 +16,7 @@ def send_mail(
     subject: str,
     message: Union[str, Path, TextIOWrapper],
     attachments: Union[List[Path], List[BufferedReader]] = [],
+    html: bool = False,
     verbose: bool = False,
 ):
     envfile = Path(envfile)
@@ -65,6 +66,7 @@ def send_mail(
     ), f"Wrong type for message: {type(message)}"
     if isinstance(message, Path):
         message = message.read_text()
+
     elif type(message) is TextIOWrapper:
         message = message.read()
 
@@ -78,7 +80,7 @@ def send_mail(
     em["From"] = sender
     em["To"] = ", ".join(recipients)
     em["Subject"] = subject
-    em.set_content(message)
+    em.set_content(message, subtype="html" if html else "plain")
 
     for file in attachments:
         ctype, encoding = guess_type(file.name)

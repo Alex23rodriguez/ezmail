@@ -21,6 +21,8 @@ parser.add_argument("-a", "--attachments", nargs="+", type=FileType("rb"), defau
 
 parser.add_argument("-e", "--env", required=False, default=".env")
 
+parser.add_argument("-H", "--html", action="store_true")
+
 parser.add_argument("-v", "--verbose", action="store_true")
 
 args = parser.parse_args()
@@ -41,5 +43,6 @@ send_mail(
     subject=args.subject,
     message=message,
     attachments=args.attachments,
+    html=args.html,
     verbose=args.verbose,
 )
