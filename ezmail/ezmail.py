@@ -64,7 +64,7 @@ def send_mail(
         )
     ), f"Wrong type for message: {type(message)}"
     if isinstance(message, Path):
-        message = open(message).read()
+        message = message.read_text()
     elif type(message) is TextIOWrapper:
         message = message.read()
 

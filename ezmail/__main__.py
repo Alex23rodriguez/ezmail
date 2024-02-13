@@ -33,7 +33,7 @@ else:
 if args.message:
     message = args.message
 else:
-    message = args.file.read()
+    message = args.file
 
 send_mail(
     envfile=args.env,
