@@ -58,7 +58,7 @@ r1@example.com
 John Doe <john@example.com>
 ```
 
-The message can also be taken from a Path or file object.
+The message can also be taken from a Path or file object. If the message contents are html, remember to set the `html` flag to True.
 
 To add attachments, pass in a list of Paths or (read-binary) file objects. The type is automatically detected.
 
@@ -71,7 +71,7 @@ from pathlib import Path
 from ezmail import send_mail
 
 recipients_file = Path("path/to/recipients.txt")
-messages_file = open("path/to/message.txt", "r")
+messages_file = open("path/to/message.html", "r")
 
 attachments = [
   Path("path/to/attachment1.csv"),
@@ -85,7 +85,8 @@ send_mail(
   recipients=recipients_file,
   message=messages_file,
   attachments=attachments,
-  envfile=envfile
+  envfile=envfile,
+  html=True,
 )
 ```
 
@@ -104,6 +105,7 @@ Possible flags:
   - `-rf` or `--recipientsfile`: the file containing the addresses of the recipients
 - `-a` or `--attachments`: a list of files to attach to the email (one or more arguments)
 - `-e` or `--env`: the env file where the credentials are defined (default `.env`)
+- `-H` or `--html`: (flag) if present, the contents of the message will be sent as html
 - `-v` or `--verbose`: set SMTP server debug level to 1, to debug possible connection issues
 
 ---
